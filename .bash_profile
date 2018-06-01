@@ -47,3 +47,9 @@ alias ls='ls -Gh'
 alias ll='ls -al'
 
 export GREP_OPTIONS='--color=always'
+
+# useful system aliases
+alias lock="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+
+# erlang/elixir
+export ERL_AFLAGS="-kernel shell_history enabled"
