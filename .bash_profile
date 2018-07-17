@@ -8,7 +8,12 @@ git_completion_script=/usr/local/etc/bash_completion.d/git-completion.bash
 test -s $git_completion_script && source $git_completion_script
 
 # PS1 is the variable for the prompt you see everytime you hit enter
-PROMPT_COMMAND=$PROMPT_COMMAND'; PS1="${c_path}\W${c_reset}$(git_prompt) :> "'
+if [ $OSTYPE == 'darwin15' ] && ! [ $ITERM_SESSION_ID ]
+then
+  PROMPT_COMMAND=$PROMPT_COMMAND'; PS1="${c_path}\W${c_reset}$(git_prompt) :> "'
+else
+  PROMPT_COMMAND=$PROMPT_COMMAND' PS1="${c_path}\W${c_reset}$(git_prompt) :> "'
+fi
 
 # Use the superior editing experience as a default
 export EDITOR=emacs
