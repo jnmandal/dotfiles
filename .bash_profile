@@ -7,26 +7,46 @@ test -d /usr/local/bin && export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PAT
 git_completion_script=/usr/local/etc/bash_completion.d/git-completion.bash
 test -s $git_completion_script && source $git_completion_script
 
-# PS1 is the variable for the prompt you see everytime you hit enter
-if [ $OSTYPE == 'darwin15' ] && ! [ $ITERM_SESSION_ID ]
-then
-  PROMPT_COMMAND=$PROMPT_COMMAND'; PS1="${c_path}\W${c_reset}$(git_prompt) :> "'
-else
-  PROMPT_COMMAND=$PROMPT_COMMAND' PS1="${c_path}\W${c_reset}$(git_prompt) :> "'
-fi
-
 # Use the superior editing experience as a default
 export EDITOR=emacs
 
-# A more colorful prompt
-# \[\e[0m\] resets the color to default color
-c_reset='\[\e[0m\]'
-# \e[0;31m\ sets the color to red
-c_path='\[\e[0;31m\]'
-# \e[0;32m\ sets the color to green
-c_git_clean='\[\e[0;32m\]'
-# \e[0;31m\ sets the color to red
-c_git_dirty='\[\e[0;31m\]'
+# Export OS name for profile determination (mac/linux)
+export UNAME=$(uname)
+
+# Colors
+export COLOR_NC='\e[0m' # No Color
+export COLOR_WHITE='\e[1;37m'
+export COLOR_BLACK='\e[0;30m'
+export COLOR_BLUE='\e[0;34m'
+export COLOR_LIGHT_BLUE='\e[1;34m'
+export COLOR_GREEN='\e[0;32m'
+export COLOR_LIGHT_GREEN='\e[1;32m'
+export COLOR_CYAN='\e[0;36m'
+export COLOR_LIGHT_CYAN='\e[1;36m'
+export COLOR_RED='\e[0;31m'
+export COLOR_LIGHT_RED='\e[1;31m'
+export COLOR_PURPLE='\e[0;35m'
+export COLOR_LIGHT_PURPLE='\e[1;35m'
+export COLOR_BROWN='\e[0;33m'
+export COLOR_YELLOW='\e[1;33m'
+export COLOR_GRAY='\e[0;30m'
+export COLOR_LIGHT_GRAY='\e[0;37m'
+
+# Color aliases for styling prompt
+c_reset=$COLOR_NC
+c_path=$COLOR_LIGHT_PURPLE
+c_symbol=$COLOR_LIGHT_CYAN
+c_git_clean=$COLOR_GREEN
+c_git_dirty=$COLOR_RED
+
+# Useful prompt
+symbol='|>'
+if [ $UNAME == 'Darwin' ] && ! [ $ITERM_SESSION_ID ]
+then
+  PROMPT_COMMAND=$PROMPT_COMMAND'; PS1="${c_path}\W${c_reset}$(git_prompt) ${c_symbol}${symbol}${c_reset} "'
+else
+  PROMPT_COMMAND=$PROMPT_COMMAND' PS1="${c_path}\W${c_reset}$(git_prompt) ${c_symbol}${symbol}${c_reset} "'
+fi
 
 # determines if the git branch you are on is clean or dirty
 git_prompt ()
