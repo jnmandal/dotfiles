@@ -1,17 +1,23 @@
 echo "Welcome $USER. Happy hacking and don't forget to stay hydrated"
 
-# Path for brew
-test -d /usr/local/bin && export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
-
-# Load git completions
-git_completion_script=/usr/local/etc/bash_completion.d/git-completion.bash
-test -s $git_completion_script && source $git_completion_script
-
 # Use the superior editing experience as a default
 export EDITOR=emacs
 
 # Export OS name for profile determination (mac/linux)
-export UNAME=$(uname)
+UNAME=$(uname)
+
+case $UNAME in
+  "Darwin")
+    test -d /usr/local/bin && export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
+    git_completion_script=/usr/local/etc/bash_completion.d/git-completion.bash
+    ;;
+  "Linux")
+    # TODO verify this is where it lives
+    git_completion_script=/etc/bash_completion.d/git-completion.bash
+    ;;
+esac
+
+test -s $git_completion_script && source $git_completion_script
 
 # Colors
 export COLOR_NC='\e[0m' # No Color
@@ -58,9 +64,9 @@ git_prompt ()
 }
 
 # Useful prompt
-symbol='|>'
 define_prompt ()
 {
+  symbol='|>'
   PS1="\[\e]0;\u@\h: \w\a\] ${c_path}\W${c_reset}$(git_prompt) ${c_symbol}${symbol}${c_reset} "
 }
 
@@ -71,16 +77,21 @@ esac
 
 # better ls
 export LSCOLORS=ExGxFxdxCxDxDxaccxaeex
-alias ls='ls -Gh'
-alias ll='ls -al'
-
 export GREP_OPTIONS='--color=always'
-
-# Useful system aliases
-alias lock="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
-
 # erlang/elixir
 export ERL_AFLAGS="-kernel shell_history enabled"
+
+# Useful system aliases
+alias ls='ls -Gh'
+alias ll='ls -al'
+case $UNAME in
+  "Darwin")
+    alias lock="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+    ;;
+  "Linux")
+    # linux aliases
+    ;;
+esac
 
 # Useful developer aliases
 alias aconfig="atom ~/.atom"
