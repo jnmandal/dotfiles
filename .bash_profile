@@ -39,15 +39,6 @@ c_symbol=$COLOR_LIGHT_CYAN
 c_git_clean=$COLOR_GREEN
 c_git_dirty=$COLOR_RED
 
-# Useful prompt
-symbol='|>'
-if [ $UNAME == 'Darwin' ] && ! [ $ITERM_SESSION_ID ]
-then
-  PROMPT_COMMAND=$PROMPT_COMMAND'; PS1="${c_path}\W${c_reset}$(git_prompt) ${c_symbol}${symbol}${c_reset} "'
-else
-  PROMPT_COMMAND=$PROMPT_COMMAND' PS1="${c_path}\W${c_reset}$(git_prompt) ${c_symbol}${symbol}${c_reset} "'
-fi
-
 # determines if the git branch you are on is clean or dirty
 git_prompt ()
 {
@@ -65,6 +56,18 @@ git_prompt ()
   fi
   echo " [$git_color$git_branch${c_reset}]"
 }
+
+# Useful prompt
+symbol='|>'
+define_prompt ()
+{
+  PS1="${c_path}\W${c_reset}$(git_prompt) ${c_symbol}${symbol}${c_reset} "
+}
+
+case $TERM_PROGRAM in
+  "Apple_Terminal") PROMPT_COMMAND="${PROMPT_COMMAND}; define_prompt";;
+  *) PROMPT_COMMAND="${PROMPT_COMMAND}define_prompt"
+esac
 
 # better ls
 export LSCOLORS=ExGxFxdxCxDxDxaccxaeex
