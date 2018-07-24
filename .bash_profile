@@ -61,7 +61,7 @@ git_prompt ()
 symbol='|>'
 define_prompt ()
 {
-  PS1="${c_path}\W${c_reset}$(git_prompt) ${c_symbol}${symbol}${c_reset} "
+  PS1="\[\e]0;\u@\h: \w\a\] ${c_path}\W${c_reset}$(git_prompt) ${c_symbol}${symbol}${c_reset} "
 }
 
 case $TERM_PROGRAM in
