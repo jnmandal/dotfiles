@@ -12,8 +12,7 @@ case $UNAME in
     git_completion_script=/usr/local/etc/bash_completion.d/git-completion.bash
     ;;
   "Linux")
-    # TODO verify this is where it lives
-    git_completion_script=/etc/bash_completion.d/git-completion.bash
+    git_completion_script=/usr/share/git/completion/git-completion.bash
     ;;
 esac
 
