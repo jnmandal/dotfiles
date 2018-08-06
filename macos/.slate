@@ -11,16 +11,18 @@ alias righthalf move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;scr
 alias leftthreefourths move screenOriginX;screenOriginY screenSizeX/3*2;screenSizeY
 alias rightonefourth   move screenOriginX+screenSizeX/3*2;screenOriginY screenSizeX/3;screenSizeY
 
-# Commands (Inspired by SplitScreen)
-bind a:ctrl,shift ${lefthalf}
+# Commands
+bind a:ctrl,shift    ${lefthalf}
+#bind left:ctrl,shift ${lefthalf}
+
 bind s:ctrl,shift ${full}
-bind d:ctrl,shift ${righthalf}
-bind q:ctrl,shift ${leftthreefourths}
-bind w:ctrl,shift ${rightonefourth}
+#bind up:cmd       ${full}
 
-# Focus Bindings
-bind up:cmd;alt   focus behind
-bind down:cmd;alt focus behind
+bind d:ctrl,shift     ${righthalf}
+#bind right:ctrl,shift ${righthalf}
 
-# Window Hints
-bind esc:cmd hint
+#bind q:ctrl,shift ${leftthreefourths}
+bind e:ctrl,shift ${leftthreefourths}
+
+#bind w:ctrl,shift ${rightonefourth}
+bind r:ctrl,shift ${rightonefourth}
