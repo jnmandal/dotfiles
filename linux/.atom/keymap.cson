@@ -1,0 +1,5 @@
+'atom-text-editor':
+  'ctrl-a': 'editor:move-to-beginning-of-line'
+  'ctrl-e': 'editor:move-to-end-of-line'
+  'ctrl-shift-up': 'core:page-up'
+  'ctrl-shift-down': 'core:page-down'
