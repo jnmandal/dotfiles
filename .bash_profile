@@ -94,3 +94,4 @@ esac
 
 # Useful developer aliases
 alias aconfig="atom ~/.atom"
+alias gcmb="git branch --merged | grep -Ev '(^\*|master)' | xargs git branch -d"
