@@ -2,6 +2,9 @@
 [core]
   excludesfile = ~/.gitignore_global
 
+[pull]
+  rebase = false
+
 # These are custom color options for the console
 [color]
   status = auto
