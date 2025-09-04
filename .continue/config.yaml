@@ -1,0 +1,54 @@
+name: Local Assistant
+version: 1.0.0
+schema: v1
+models:
+  - name: Qwen2.5 7b
+    provider: ollama
+    model: qwen2.5:7b
+    roles:
+      - chat
+      - edit
+      - apply
+    capabilities:
+      - tool_use
+  - name: Qwen3 8b
+    provider: ollama
+    model: qwen3:8b
+    roles:
+      - chat
+      - edit
+      - apply
+    capabilities:
+      - tool_use
+  - name: Starcoder2 7b
+    provider: ollama
+    model: starcoder2:7b
+    roles:
+      - autocomplete
+  # - name: Qwen2.5-Coder 1.5B
+  #   provider: ollama
+  #   model: qwen2.5-coder:1.5b-base
+  #   roles:
+  #     - autocomplete
+  # - name: Starcoder 1B
+  #   provider: ollama
+  #   model: starcoder:1b
+  #   roles:
+  #     - autocomplete
+  - name: Nomic Embed
+    provider: ollama
+    model: nomic-embed-text:latest
+    roles:
+      - embed
+context:
+  - provider: code
+  - provider: docs
+  - provider: diff
+  - provider: terminal
+  - provider: problems
+  - provider: folder
+  - provider: codebase
+docs:
+  - name: continue.dev
+    faviconUrl: ""
+    startUrl: https://docs.continue.dev/
